@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<GRE>
+ <word key="sunder"/>
+ <word key="supercilious"/>
+ <word key="superficial"/>
+ <word key="superfluous"/>
+ <word key="superimpose"/>
+ <word key="supine"/>
+ <word key="supplant"/>
+ <word key="supple"/>
+ <word key="supplement"/>
+ <word key="supplicate"/>
+ <word key="supposition"/>
+ <word key="suppress"/>
+ <word key="surcharge"/>
+ <word key="surfeit"/>
+ <word key="surrender"/>
+ <word key="surreptitious"/>
+ <word key="susceptibility"/>
+ <word key="suspend"/>
+ <word key="suture"/>
+ <word key="svelte">
+  <def>
+   <en>(of a person) slender and elegant</en>
+   <zh>苗条优雅的，婷婷玉立的（女性）</zh>
+  </def>
+ </word>
+ <word key="swear"/>
+ <word key="sweltering">
+  <def>
+   <en>oppressively hot</en>
+   <zh>酷热的</zh>
+  </def>
+ </word>
+ <word key="usurp"/>
+</GRE>

@@ -14,7 +14,7 @@ public class TrieMapTest {
 	public void test() throws FileNotFoundException {
 		TrieMap map = new TrieMap();
 
-		XMLParser.parse(map, "GRE.xml");
+		XMLParser.parse(map, "dict.xml");
 
 		System.out.println(map);
 	}
@@ -23,7 +23,7 @@ public class TrieMapTest {
 	public void testWordList() throws FileNotFoundException {
 		TrieMap map = new TrieMap();
 
-		XMLParser.parse(map, "GRE.xml");
+		XMLParser.parse(map, "dict.xml");
 
 		for (Word word : map.wordList("sw"))
 			System.out.println(word);

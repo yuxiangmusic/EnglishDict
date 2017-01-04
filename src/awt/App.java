@@ -59,7 +59,7 @@ public class App {
 			setMaximumSize(new Dimension(999, 600));
 
 			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			setTitle("GRE");
+			setTitle("Dictionary");
 
 			contentPanel = new JPanel();
 			contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.PAGE_AXIS));

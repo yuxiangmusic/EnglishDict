@@ -210,6 +210,8 @@ public class App {
 
 		private void updateResultPanel(String key) {
 			resultPanel.removeAll();
+			if (key == null)
+				return;
 			if (!key.isEmpty()) {
 				Word word = trieMap.get(key);
 				if (word == null)

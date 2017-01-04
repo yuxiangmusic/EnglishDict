@@ -1,2 +1,2 @@
 # EnglishDict
-English dictionary customized to allow entry editting.
+A simple editable English dictionary

@@ -19,7 +19,7 @@ import core.Def;
 import core.TrieMap;
 import core.Word;
 
-public class XMLWriter {
+public class XMLWriter implements XMLIO {
 
 	public static void write(String fileName, TrieMap trieMap) {
 
@@ -29,35 +29,57 @@ public class XMLWriter {
 
 			// root
 			Document doc = docBuilder.newDocument();
-			Element rootElement = doc.createElement("GRE");
+			Element rootElement = doc.createElement(DICT);
 			doc.appendChild(rootElement);
 
 			// words
 			for (Word word : trieMap.values()) {
-				Element wordElement = doc.createElement("word");
+				if (word.defList().isEmpty())
+					continue;
+				Element wordElement = doc.createElement(WORD);
 				rootElement.appendChild(wordElement);
-				wordElement.setAttribute("key", word.key());
+				wordElement.setAttribute(KEY, word.key());
 
 				for (Def def : word.defList()) {
-					if (!def.isEmpty()) {
-						Element defElement = doc.createElement("def");
-						wordElement.appendChild(defElement);
-
-						// EN
-						if (!def.en().isEmpty()) {
-							Element enElement = doc.createElement("en");
-							defElement.appendChild(enElement);
-							enElement.appendChild(doc.createTextNode(def.en()));
-						}
-
-						// ZH
-						if (!def.zh().isEmpty()) {
-							Element zhElement = doc.createElement("zh");
-							defElement.appendChild(zhElement);
-							zhElement.appendChild(doc.createTextNode(def.zh()));
+					if (def.isEmpty())
+						continue;
+					Element defElement = doc.createElement(DEF);
+					wordElement.appendChild(defElement);
+					// EN
+					if (!def.en().isEmpty()) {
+						Element enElement = doc.createElement(EN);
+						defElement.appendChild(enElement);
+						enElement.appendChild(doc.createTextNode(def.en()));
+					}
+					// ZH
+					if (!def.zh().isEmpty()) {
+						Element zhElement = doc.createElement(ZH);
+						defElement.appendChild(zhElement);
+						zhElement.appendChild(doc.createTextNode(normalize(def.zh())));
+					}
+					// Part of Speech
+					if (!def.pa().isEmpty()) {
+						Element paElement = doc.createElement(PA);
+						defElement.appendChild(paElement);
+						paElement.appendChild(doc.createTextNode(def.pa()));
+					}
+					// Pronunciation
+					if (!def.pr().isEmpty()) {
+						Element phElement = doc.createElement(PR);
+						defElement.appendChild(phElement);
+						phElement.appendChild(doc.createTextNode(def.pr()));
+					}
+					// Examples
+					if (!def.ex().isEmpty()) {
+						Element exElement = doc.createElement(EX);
+						defElement.appendChild(exElement);
+						for (String s : def.ex()) {
+							Element sElement = doc.createElement(S);
+							exElement.appendChild(sElement);
+							sElement.appendChild(doc.createTextNode(s));
 						}
 					}
-				}
+				} // end of DEF
 			}
 
 			// write to XML
@@ -73,6 +95,19 @@ public class XMLWriter {
 		} catch (TransformerException tfe) {
 			tfe.printStackTrace();
 		}
+	}
+
+	static String normalize(String s) {
+		s = s.replaceAll("，", ", ");
+		s = s.replaceAll("。", ". ");
+		s = s.replaceAll("；", "; ");
+		s = s.replaceAll("（", "(");
+		s = s.replaceAll("）", ")");
+		s = s.replaceAll("“", "\"");
+		s = s.replaceAll("”", "\"");
+		s = s.replaceAll("‘", "'");
+		s = s.replaceAll("’", "'");
+		return s;
 	}
 
 }

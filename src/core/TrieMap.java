@@ -36,7 +36,7 @@ public class TrieMap implements Map<String, Word> {
 
 		@Override
 		public Word setValue(Word value) {
-			Word old = word;
+			Word old = value;
 			word = value;
 			return old;
 		}
@@ -166,6 +166,8 @@ public class TrieMap implements Map<String, Word> {
 
 	@Override
 	public Word put(String key, Word value) {
+		if (key.isEmpty())
+			return null;
 		TrieEntry entry = getEntryCreate(key);
 		if (entry.word == null)
 			size++;

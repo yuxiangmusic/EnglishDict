@@ -13,6 +13,13 @@ public class Word {
 		this.key = key;
 	}
 
+	public Word(Word word) {
+		this.key = word.key;
+		defList.clear();
+		for (Def def : word.defList())
+			defList.add(new Def(def));
+	}
+
 	public String key() {
 		return key;
 	}
@@ -31,8 +38,10 @@ public class Word {
 				sb.append("  [en] " + def.en() + "\n");
 			if (!def.zh().isEmpty())
 				sb.append("  [zh] " + def.zh() + "\n");
-			if (!def.partofspeech().isEmpty())
-				sb.append("  [partofspeech] " + def.partofspeech() + "\n");
+			if (!def.pa().isEmpty())
+				sb.append("  [pa] " + def.pa() + "\n");
+			if (!def.pr().isEmpty())
+				sb.append("  [pr] " + def.pr() + "\n");
 		}
 		return sb.toString().trim();
 	}
